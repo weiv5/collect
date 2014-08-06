@@ -84,8 +84,8 @@ Circle.prototype = {
             var rx3 = rx2;
             var ry3 = ry2;
             var rz3 = rz2;
+            var per = c.d/(c.d+rz3);
 
-            per = c.d/(c.d+rz3);
             c.mcList[j].cx = rx3;
             c.mcList[j].cy = ry3;
             c.mcList[j].cz = rz3;
