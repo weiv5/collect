@@ -1,10 +1,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.js"></script>
 <script src="circle.js"></script>
 <script>
-$(document).ready(function(){
-    new Circle("div1");
-});
+window.onload = function() {
+    new Circle("div1", 350);
+}
 </script>
 <style>
 #div1 {position:relative; width:1024px; height:768px; background:#000;}
