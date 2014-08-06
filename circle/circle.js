@@ -17,7 +17,6 @@ Circle.prototype = {
         c.mouseX = 0;
         c.mouseY = 0;
         c.howElliptical = 1;
-        c.dtr = Math.PI/180;
 
         c.oDiv= document.getElementById(c.el);
         c.l = c.oDiv.offsetWidth/2;
@@ -62,21 +61,19 @@ Circle.prototype = {
         c.mouseY = -c.oDiv.offsetHeight/50;
     },
     update : function(c) {
-        var a;
-        var b;
         if(c.active) {
-            a = (-Math.min( Math.max( -c.mouseY, -c.size ), c.size ) / c.radius ) * c.tspeed;
-            b = (Math.min( Math.max( -c.mouseX, -c.size ), c.size ) / c.radius ) * c.tspeed;
+            var a = (-Math.min( Math.max( -c.mouseY, -c.size ), c.size ) / c.radius ) * c.tspeed;
+            var b = (Math.min( Math.max( -c.mouseX, -c.size ), c.size ) / c.radius ) * c.tspeed;
         } else {
-            a = c.lasta * 0.98;
-            b = c.lastb * 0.98;
+            var a = c.lasta * 0.98;
+            var b = c.lastb * 0.98;
         }
         c.lasta = a;
         c.lastb = b;
         if(Math.abs(a)<=0.01 && Math.abs(b)<=0.01) {
             return;
         }
-        var po = c.sineCosine(a, b, 0);
+        var po = c.sinCos(a, b);
         for(var j=0; j<c.mcList.length; j++) {
             var rx1 = c.mcList[j].cx;
             var ry1 = c.mcList[j].cy*po[1] + c.mcList[j].cz*(-po[0]);
@@ -84,8 +81,8 @@ Circle.prototype = {
             var rx2 = rx1*po[3] + rz1*po[2];
             var ry2 = ry1;
             var rz2 = rx1*(-po[2]) + rz1*po[3];
-            var rx3 = rx2*po[5] + ry2*(-po[4]);
-            var ry3 = rx2*po[4] + ry2*po[5];
+            var rx3 = rx2;
+            var ry3 = ry2;
             var rz3 = rz2;
 
             per = c.d/(c.d+rz3);
@@ -105,14 +102,13 @@ Circle.prototype = {
             c.aA[j].style.display = 'block';
         }
     },
-    sineCosine : function( a, b, c) {
-        var sa = Math.sin(a * c.dtr);
-        var ca = Math.cos(a * c.dtr);
-        var sb = Math.sin(b * c.dtr);
-        var cb = Math.cos(b * c.dtr);
-        var sc = Math.sin(c * c.dtr);
-        var cc = Math.cos(c * c.dtr);
-        return [sa, ca, sb, cb, sc, cc];
+    sinCos : function( a, b) {
+        var dtr = Math.PI/180;
+        var sa = Math.sin(a * dtr);
+        var ca = Math.cos(a * dtr);
+        var sb = Math.sin(b * dtr);
+        var cb = Math.cos(b * dtr);
+        return [sa, ca, sb, cb];
     }
 };
 this.Circle = Circle;
