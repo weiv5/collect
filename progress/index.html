@@ -4,23 +4,17 @@
         <script src="raphael.js"></script>
         <script>
             window.onload = function () {
-                spinner("container");
+                spinner("container", 50, 80, 50, 2, "#fff");
             };
             
-            function spinner(holderid, R1, R2, count, stroke_width, colour) {
-                var sectorsCount = count || 50,
-                    color = colour || "#fff",
-                    width = stroke_width || 2,
-                    r1 = R1 || 50,
-                    r2 = R2 || 80,
-                    r = Raphael(holderid, r2 * 2 + width * 2, r2 * 2 + width * 2),
-                    
+            function spinner(holderid, r1, r2, sectorsCount, width, color) {
+                var r = Raphael(holderid, r2 * 2 + width * 2, r2 * 2 + width * 2),
                     sectors = [],
                     opacity = [],
                     beta = 2 * Math.PI / sectorsCount,
-
                     pathParams = {stroke: color, "stroke-width": width, "stroke-linecap": "round"};
                     Raphael.getColor.reset();
+
                 for (var i = 0; i < sectorsCount; i++) {
                     var alpha = beta * i,
                         cos = Math.cos(alpha),
