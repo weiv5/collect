@@ -3,8 +3,12 @@
         <meta charset="utf-8">
         <script src="raphael.js"></script>
         <script>
+            var f;
             window.onload = function () {
-                spinner("container", 50, 80, 50, 2, "#fff");
+                f = spinner("container", 50, 80, 50, 2, "rainbow");
+                setTimeout(function(){
+                    f();
+                }, 5000);
             };
             
             function spinner(holderid, r1, r2, sectorsCount, width, color) {
